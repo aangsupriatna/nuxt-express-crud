@@ -39,6 +39,9 @@ export default {
 
         updatePost: debounce(async function () {
             await this.$store.dispatch("Post/patchPost")
+            // show the message
+            this.$store.commit("Snackbar/show", "Post updated")
+            this.$router.push("/post/list")
         }, 1000),
 
         savePost: debounce(async function () {

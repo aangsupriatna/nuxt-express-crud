@@ -11,10 +11,10 @@ export default {
 
         users: {
             get() {
-                return this.$store.state.Users.users;
+                return this.$store.state.Users.users
             },
             set(users) {
-                this.$store.commit("Users/SET_USERS", users);
+                this.$store.commit("Users/SET_USERS", users)
             }
         }
     },
@@ -38,6 +38,9 @@ export default {
         updateUser: debounce(async function () {
             this.setUpdatedDate(this.$moment().format())
             await this.$store.dispatch("User/patchUser")
+            // show the message
+            this.$store.commit("Snackbar/show", "User updated")
+            this.$router.push({ name: "user-list" })
         }, 1000),
 
         deleteUser: debounce(async function (user) {

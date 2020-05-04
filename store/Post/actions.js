@@ -9,8 +9,6 @@ const actions = {
 
                 resolve(data)
 
-                this.$router.push("/post/list")
-
             } catch (error) {
                 reject(error)
             }
@@ -43,8 +41,6 @@ const actions = {
                 })
 
                 resolve()
-
-                this.$router.push("/post/list")
 
             } catch (error) {
                 reject(error)

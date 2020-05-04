@@ -1,6 +1,6 @@
-# nuxt-api
+# Nuxt.js with express and Nedb for project starter
 
-> My sensational Nuxt.js project
+> Nuxt.js project starter
 
 ## Build Setup
 

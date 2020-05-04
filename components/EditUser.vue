@@ -33,16 +33,12 @@
                     </v-card>
                 </v-col>
             </v-row>
-            <v-snackbar v-model="snackbar" :timeout="timeout">
-                {{ text }}
-                <v-btn color="blue" text @click="snackbar = false">Close</v-btn>
-            </v-snackbar>
         </v-container>
     </v-form>
 </template>
 
 <script>
-import UserMixin from "@/components/mixins/UserMixin";
+import UserMixin from "@/components/mixins/UserMixin"
 export default {
     mixins: [UserMixin],
 
