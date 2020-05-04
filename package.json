@@ -1,0 +1,31 @@
+{
+  "name": "nuxt-express-crud",
+  "version": "1.0.0",
+  "description": "Nuxt.JS basic CRUDS using Express as API server and Nedb as Database.",
+  "author": "Aang Supriatna",
+  "private": true,
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development nodemon server/index.js --watch server",
+    "build": "nuxt build",
+    "start": "cross-env NODE_ENV=production node server/index.js",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "@nuxtjs/auth": "^4.9.1",
+    "@nuxtjs/axios": "^5.3.6",
+    "bcryptjs": "^2.4.3",
+    "cross-env": "^5.2.0",
+    "express": "^4.16.4",
+    "express-jwt": "^5.3.3",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.15",
+    "nedb": "^1.8.0",
+    "nuxt": "^2.0.0"
+  },
+  "devDependencies": {
+    "@nuxtjs/moment": "^1.6.0",
+    "@nuxtjs/vuetify": "^1.11.0",
+    "moment-locales-webpack-plugin": "^1.2.0",
+    "nodemon": "^1.18.9"
+  }
+}
