@@ -1,9 +1,16 @@
 <template>
     <v-form>
         <v-container>
+            {{ posty }}
             <v-row>
                 <v-col>
-                    <v-card flat>
+                    <v-boilerplate
+                        v-if="firstLoad"
+                        :loading="loading"
+                        class="mb-6"
+                        type="article, actions"
+                    ></v-boilerplate>
+                    <v-card v-show="!firstLoad" flat>
                         <v-card-text>
                             <v-text-field
                                 :value="post.title"
@@ -39,7 +46,17 @@ import PostMixin from "@/components/mixins/PostMixin";
 export default {
     mixins: [PostMixin],
 
-    data: () => ({
+    asyncData() {
+        return new Promise(resolve => {
+            setTimeout(function() {
+                resolve({ posty: "post" });
+            }, 1000);
+        });
+    },
+
+    data: () => ({        
+        loading: true,
+        firstLoad: true,
         snackbar: false,
         text: "Post has been updated.",
         timeout: 1000

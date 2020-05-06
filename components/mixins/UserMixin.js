@@ -21,9 +21,14 @@ export default {
 
     methods: {
         async getUsers() {
-            let { data } = await this.$axios.get("/api/users");
-
-            this.users = data;
+            this.loading = true
+            await this.$axios.get("/api/users").then(result => {
+                setTimeout(() => {
+                    if (this.firstLoad) this.firstLoad = false
+                    this.loading = false
+                    this.users = result.data
+                }, 1000)
+            })
         },
 
         login: debounce(async function () {
@@ -32,7 +37,7 @@ export default {
         }, 1000),
 
         signUp: debounce(async function () {
-            await this.$store.dispatch("User/signUp").then( this.$router.push({name: "login"}))
+            await this.$store.dispatch("User/signUp").then(this.$router.push({ name: "login" }))
         }, 1000),
 
         updateUser: debounce(async function () {

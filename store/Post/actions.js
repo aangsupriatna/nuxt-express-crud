@@ -2,12 +2,12 @@ const actions = {
     sendPost({ state }) {
         return new Promise(async (resolve, reject) => {
             try {
-                let { data } = await this.$axios.post('/api/post', {
-                        title: state.post.title,
-                        content: state.post.content
+                await this.$axios.post('/api/post', {
+                    title: state.post.title,
+                    content: state.post.content
+                }).then(data => {
+                    resolve(data)
                 })
-
-                resolve(data)
 
             } catch (error) {
                 reject(error)
@@ -19,11 +19,11 @@ const actions = {
         return new Promise(async (resolve, reject) => {
 
             try {
-                let { data } = await this.$axios.get('/api/post', {
+                await this.$axios.get('/api/post', {
                     params: { _id: _id }
+                }).then(post => {
+                    resolve(post.data)
                 })
-
-                resolve(data)
 
             } catch (error) {
                 reject(error)

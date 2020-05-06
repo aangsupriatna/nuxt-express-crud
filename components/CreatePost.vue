@@ -3,7 +3,13 @@
         <v-container>
             <v-row>
                 <v-col>
-                    <v-card flat>
+                    <v-boilerplate
+                        v-if="firstLoad"
+                        :loading="loading"
+                        class="mb-6"
+                        type="article, actions"
+                    ></v-boilerplate>
+                    <v-card v-show="!firstLoad" flat>
                         <v-card-text>
                             <v-text-field
                                 :value="post.title"
@@ -38,7 +44,18 @@ export default {
     mixins: [PostMixin],
 
     mounted() {
-        this.resetPost;
+        setTimeout(() => {
+            if (this.firstLoad) this.firstLoad = false;
+            this.loading = false;
+            this.resetPost;
+        }, 1000);
+    },
+
+    data() {
+        return {
+            loading: true,
+            firstLoad: true
+        };
     },
 
     computed: {

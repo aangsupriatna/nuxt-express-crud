@@ -39,7 +39,7 @@
                 <template v-slot:activator="{ on }">
                     <v-btn v-on="on" text>
                         <v-icon class="pr-2">mdi-account-circle</v-icon>
-                        User
+                        {{ user }}
                     </v-btn>
                 </template>
                 <v-list class="py-0">
@@ -63,7 +63,12 @@
 export default {
     data: () => ({
         drawer: null
-    })
+    }),
+    computed: {
+        user() {
+            return this.$auth.$state.user.username
+        }
+    }
 };
 </script>
 

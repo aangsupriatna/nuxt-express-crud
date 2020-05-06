@@ -2,11 +2,44 @@ import { mapMutations } from 'vuex'
 import debounce from 'lodash/debounce'
 
 export default {
+    components: {
+        VBoilerplate: {
+            functional: true,
+
+            render(h, { data, props, children }) {
+                return h(
+                    "v-skeleton-loader",
+                    {
+                        ...data,
+                        props: {
+                            boilerplate: true,
+                            ...props
+                        }
+                    },
+                    children
+                );
+            }
+        }
+    },
+
     computed: {
+        loadings: {
+            get() {
+                return this.$store.state.Loading.loading
+            }
+        },
+
         post: {
             get() {
                 return this.$store.state.Post.post
             }
+            // get() {
+            //     setTimeout(() => {
+            //         if (this.firstLoad) this.firstLoad = false;
+            //         this.loading = false;
+            //         return this.$store.state.Post.post
+            //     }, 1000);                
+            // }
         },
 
         posts: {
@@ -32,9 +65,18 @@ export default {
 
     methods: {
         async getPosts() {
-            let { data } = await this.$axios.get("/api/posts");
-            // console.log(data)
-            this.posts = data;
+            this.loading = true
+            this.$store.dispatch("Loading/startLoading")
+            console.log(this.loadings)
+            this.$axios.get("/api/posts").then(result => {
+                setTimeout(() => {
+                    if (this.firstLoad) this.firstLoad = false
+                    this.loading = false
+                    this.posts = result.data
+                    this.$store.dispatch("Loading/finishLoading")
+                    console.log(this.loadings)
+                }, 1000)
+            })
         },
 
         updatePost: debounce(async function () {

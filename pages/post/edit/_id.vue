@@ -21,8 +21,9 @@ export default {
     },
 
     async fetch({ store, params }) {
-        let post = await store.dispatch("Post/getPost", params._id);
-        store.commit("Post/SET_POST", post);
+        let post = await store.dispatch("Post/getPost", params._id).then(data => {
+            store.commit("Post/SET_POST", data);
+        })
     },
 
     computed: {
